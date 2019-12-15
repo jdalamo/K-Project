@@ -1,0 +1,203 @@
+﻿@model fa19projectgroup16.Models.StockPortfolio
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <h6 class="error">@ViewBag.ErrorMessage</h6>
+}
+
+<div>
+    <h4>Stock Portfolio</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (ViewBag.Is_Balanced)
+            {
+                @:Portfolio is balanced
+            }
+            else
+            {
+                @:Portfolio is not balanced
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            Cash Balance
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+        <dt class = "col-sm-2">
+            Stock Balance
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.StockBalance
+        </dd>
+        <dt class = "col-sm-2">
+            Total Balance
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.TotalBalance
+        </dd>
+        <dt class = "col-sm-2">
+            Total Fees
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.TotalFees
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AccountName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AccountType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AccountNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+    </dl>
+</div>
+<h4>Stocks in your portfolio</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Company
+            </th>
+            <th>
+                Ticker Symbol
+            </th>
+            <th>
+                Stock Type
+            </th>
+            <th>
+                Fee
+            </th>
+            <th>
+                Purchase Price
+            </th>
+            <th>
+                Current Price
+            </th>
+            <th>
+                Number of Shares
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var svm in ViewBag.StockViewModels)
+        {
+            <tr>
+                <td>
+                    @svm.StockName
+                </td>
+                <td>
+                    @svm.StockTicker
+                </td>
+                <td>
+                    @svm.StockType
+                </td>
+                <td>
+                    @svm.StockFee
+                </td>
+                <td>
+                    @svm.PurchasePrice
+                </td>
+                <td>
+                    @svm.CurrentPrice
+                </td>
+                <td>
+                    @svm.NumberOfShares
+                </td>
+                <td>
+                    <a asp-action="Sell" asp-controller="StockPortfolios" asp-route-stockID="@svm.StockID" asp-route-numShares="@svm.NumberOfShares" asp-route-pPrice="@svm.PurchasePrice" asp-route-cPrice="@svm.CurrentPrice">Sell</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Transactions on this account</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Amount
+            </th>
+            <th>
+                Transaction Type
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Comment
+            </th>
+            <th>
+                Transaction Status
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tran in ViewBag.Transactions)
+        {
+            <tr>
+                <td>
+                    @tran.Amount
+                </td>
+                <td>
+                    @tran.TransactionType
+                </td>
+                <td>
+                    @tran.Date
+                </td>
+                <td>
+                    @tran.Description
+                </td>
+                <td>
+                    @tran.Comment
+                </td>
+                <td>
+                    @tran.TransactionStatus
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AccountID">Edit</a> |
+    <a asp-action="Index" asp-controller="Accounts">Back to List</a>
+</div>
+<div>
+    <a class="btn btn-success" asp-action="SearchTransactions" asp-controller="Transactions">Search Transactions</a>
+</div>
+
+<style>
+    .error{
+        color: red;
+    }
+</style>

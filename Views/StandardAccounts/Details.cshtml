@@ -1,0 +1,75 @@
+﻿@model fa19projectgroup16.Models.StandardAccount
+@using fa19projectgroup16.Models.ViewModels
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>StandardAccount</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccountName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccountType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AccountNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+    </dl>
+</div>
+
+
+<h5>Transactions on this Account</h5>
+<table class="table table-primary">
+    <tr>
+        <th>Transaction Type</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Comment</th>
+    </tr>
+    @foreach (Transaction t in Model.Transactions)
+    {
+        <tr>
+            <td>@Html.DisplayFor(ModelItem => t.TransactionType)</td>
+            <td>@Html.DisplayFor(ModelItem => t.Amount)</td>
+            <td>@Html.DisplayFor(ModelItem => t.Date)</td>
+            <td>@Html.DisplayFor(ModelItem => t.Description)</td>
+            <td>@Html.DisplayFor(ModelItem => t.Comment)</td>
+        </tr>
+    }
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AccountID">Edit</a> |
+    <a asp-action="Index" asp-controller="Accounts">Back to List</a>
+</div>
+<div>
+    <a class="btn btn-success" asp-action="SearchTransactions" asp-controller="Transactions">Search Transactions</a>
+</div>

@@ -1,0 +1,79 @@
+@model fa19projectgroup16.Models.ViewModels.SearchViewModel
+@using fa19projectgroup16.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Search Transactions";
+}
+
+<h1>Search Transactions</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DisplaySearchResults" method="get">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SelectedTransactionNumber" class="control-label"></label>
+                <input asp-for="SelectedTransactionNumber" class="form-control" />
+                <span asp-validation-for="SelectedTransactionNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchType" class="control-label"></label>
+                <select asp-for="SearchType" asp-items="Html.GetEnumSelectList<TransactionType>()" class="form-control"></select>
+                <span asp-validation-for="SearchType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchDescription" class="control-label"></label>
+                <input asp-for="SearchDescription" class="form-control" />
+                <span asp-validation-for="SearchDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmount, Amount.AllAmounts) All Amounts </label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmount, Amount.ZeroToHundred) 0-100 </label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmount, Amount.HundredToTwoHundred) 100-200 </label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmount, Amount.TwoHundredToThreeHundred) 200-300 </label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmount, Amount.ThreeHundredPlus) 300+ </label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmount, Amount.Custom) Custom Amount </label>
+                <br />
+                <span asp-validation-for="SearchAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchAmountAbove" class="control-label"></label>
+                <input asp-for="SearchAmountAbove" class="form-control" />
+                <span asp-validation-for="SearchAmountAbove" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchAmountBelow" class="control-label"></label>
+                <input asp-for="SearchAmountBelow" class="form-control" />
+                <span asp-validation-for="SearchAmountBelow" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="radio">@Html.RadioButtonFor(model => model.DateSelection, DateSelectionType.AllAvailable) All Available Days </label>
+                <label class="radio">@Html.RadioButtonFor(model => model.DateSelection, DateSelectionType.FifteenDays) Last 15 Days </label>
+                <label class="radio">@Html.RadioButtonFor(model => model.DateSelection, DateSelectionType.ThirtyDays) Last 30 Days </label>
+                <label class="radio">@Html.RadioButtonFor(model => model.DateSelection, DateSelectionType.SixtyDays) Last 60 Days </label>
+
+                <label class="radio">@Html.RadioButtonFor(model => model.DateSelection, DateSelectionType.Custom) Custom Date </label>
+                <br />
+                <span asp-validation-for="SearchAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DateAfter" class="control-label"></label>
+                <input asp-for="DateAfter" class="form-control" />
+                <span asp-validation-for="DateAfter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateBefore" class="control-label"></label>
+                <input asp-for="DateBefore" class="form-control" />
+                <span asp-validation-for="DateBefore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

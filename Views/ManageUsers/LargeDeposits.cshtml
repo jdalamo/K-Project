@@ -1,0 +1,50 @@
+﻿@model fa19projectgroup16.Transaction
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Customers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Transaction item in @ViewBag.LargeDeposits)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Accept" asp-route-id="@item.TransactionID">Accept</a> |
+                    <a asp-action="Reject" asp-route-id="@item.TransactionID">Reject</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

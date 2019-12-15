@@ -1,0 +1,53 @@
+﻿@model IEnumerable<fa19projectgroup16.Dispute>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrectAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManagerComment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerComment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorrectAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManagerComment)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DisputeID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DisputeID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DisputeID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

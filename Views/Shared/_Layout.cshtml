@@ -1,0 +1,70 @@
+﻿@*Author: Kevin LePage
+    Date: 10/22/2019*@
+
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@*
+    This layout provides the basic layout instructions for each view
+    Bootstrap is included in this, in addition to the special nav bar for this website, in addition to connections to database
+*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Bevo's Bank and Trust'</title>
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav-content">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Accounts", "Index", "Accounts", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Payees", "Index", "Payees", null, new { @class = "nav-link" })
+                        </li>
+                    }
+                        <li class="nav-item">
+                            @Html.ActionLink("Transactions", "Index", "Transactions", null, new { @class = "nav-link" })
+                        </li>
+
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Manage User Roles", "Index", "RoleAdmin", null, new { @class = "nav-link" })
+                        </li>
+                    }
+                </ul>
+            </div>
+            @await Html.PartialAsync("_LoginPartial")
+        </nav>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - BevoSoft Consultants</p>
+        </footer>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/popper.js/popper.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

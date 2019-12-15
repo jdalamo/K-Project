@@ -1,0 +1,52 @@
+﻿@model IEnumerable<fa19projectgroup16.Models.Account>
+
+@{
+    ViewData["Title"] = "Selector";
+}
+
+<h1>What account do you want to open?</h1>
+
+<table>
+    <tr>
+        <td>
+            <form asp-action="Index">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" value="Checkings" name="accountType">
+                <div class="form-group">
+                    <input type="submit" value="Create Checking Account" class="btn btn-primary" />
+                </div>
+            </form>
+        </td>
+        <td>
+            <form asp-action="Index">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" value="Savings" name="accountType">
+                <div class="form-group">
+                    <input type="submit" value="Create Savings Account" class="btn btn-primary" />
+                </div>
+            </form>
+        </td>
+        @if (ViewBag.Age == "Young")
+        {
+            <td>
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="IRA" name="accountType">
+                    <div class="form-group">
+                        <input type="submit" value="Create IRA Account" class="btn btn-primary" />
+                    </div>
+                </form>
+            </td>
+        }
+        <td>
+            <form asp-action="Index">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" value="StockPortfolio" name="accountType">
+                <div class="form-group">
+                    <input type="submit" value="Create Stock Portfolio" class="btn btn-primary" />
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+

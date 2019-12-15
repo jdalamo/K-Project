@@ -1,0 +1,52 @@
+﻿@model IEnumerable<fa19projectgroup16.Dispute>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Disputes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction.Account.AppUser.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction.Account.AppUser.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrectAmount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Dispute item in @ViewBag.AllDisputes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Transaction.Account.AppUser.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Transaction.Account.AppUser.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerComment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Transaction.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CorrectAmount)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

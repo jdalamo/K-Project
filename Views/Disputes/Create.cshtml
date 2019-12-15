@@ -1,0 +1,45 @@
+﻿@model fa19projectgroup16.Dispute
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Dispute</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewBag.Error != null)
+        {
+            <p class="alert-danger">@ViewBag.Error</p>
+        }
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" value="@ViewBag.TransactionID" name="transactionID">
+            <div class="form-group">
+                <label asp-for="CustomerComment" class="control-label"></label>
+                <input asp-for="CustomerComment" class="form-control" />
+                <span asp-validation-for="CustomerComment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorrectAmount" class="control-label"></label>
+                <input asp-for="CorrectAmount" class="form-control" />
+                <span asp-validation-for="CorrectAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <p>Should this transaction be deleted?</p>
+                <input type="radio" name="option" value="Yes" /> Yes
+                <input checked type="radio" name="option" value="No" /> No
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Transactions">Back to Transaction</a>
+</div>
+

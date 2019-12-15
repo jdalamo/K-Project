@@ -1,0 +1,140 @@
+﻿@model fa19projectgroup16.Transaction
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Transaction</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TransactionID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransactionID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TransactionType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransactionType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+        @if (ViewBag.transactionType == "Payment" || ViewBag.transactionType != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Payee.PayeeName)
+            </dt>
+        }
+        @if (ViewBag.transactionType == "Payment" || ViewBag.transactionType != null)
+        {
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Payee.PayeeName)
+            </dd>
+        }
+    </dl>
+        </div>
+        <div>
+            @foreach (Dispute d in Model.Disputes)
+            {
+                <h5>Dispute</h5>
+                <table class="table">
+                    <thead>
+
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(ModelItem => d.CustomerComment)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(ModelItem => d.Status)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(ModelItem => d.ManagerComment)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(ModelItem => d.CustomerComment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(ModelItem => d.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(ModelItem => d.ManagerComment)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div>
+            <h5>Five Similar Transactions</h5>
+            <table class="table table-primary">
+                <tr>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Comment</th>
+                </tr>
+                @foreach (Transaction t in ViewBag.FiveSimilar)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(ModelItem => t.TransactionType)</td>
+                        <td>@Html.DisplayFor(ModelItem => t.Amount)</td>
+                        <td>@Html.DisplayFor(ModelItem => t.Date)</td>
+                        <td>@Html.DisplayFor(ModelItem => t.Description)</td>
+                        <td>@Html.DisplayFor(ModelItem => t.Comment)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div>
+            @if (User.IsInRole("Customer"))
+            {
+                @if (ViewBag.numDisputes == 0 && !ViewBag.Pending && ViewBag.Enabled == true)
+                {
+                    <a asp-action="Create" asp-controller="Disputes" asp-route-id="@Model.TransactionID">Dispute</a><br />
+                }
+            }
+
+            @*@if (ViewBag.numDisputes == 0 && !ViewBag.Pending && ViewBag.Enabled == true)
+        {
+            <a asp-action="Create" asp-controller="Disputes" asp-route-id="@Model.TransactionID">Dispute</a><br />
+        }*@
+
+            @if (ViewBag.Enabled == true)
+            {
+                <a asp-action="Edit" asp-route-id="@Model.TransactionID">Edit</a>
+            }
+            | <a asp-action="Index">Back to List</a>
+        </div>

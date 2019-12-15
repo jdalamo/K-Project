@@ -1,0 +1,67 @@
+﻿<h3>Summary</h3>
+
+<table width="800">
+    <thead>
+        <tr>
+            <th>
+                Company
+            </th>
+            <th>
+                Number of shares being sold
+            </th>
+            <th>
+                Number of shares remaining after sale
+            </th>
+            <th>
+                Related Fees
+            </th>
+            <th>
+                Net Profit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @ViewBag.Company
+            </td>
+            <td>
+                @ViewBag.NumSharesWanted
+            </td>
+            <td>
+                @ViewBag.SharesRemaining
+            </td>
+            <td>
+                @ViewBag.Fee
+            </td>
+            <td>
+                @ViewBag.NetProfit
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="col-md-4">
+    <form asp-action="SellConfirm">
+        <div class="form-group">
+            <input type="hidden" name="numShares" value="@ViewBag.NumSharesWanted"/>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="stockID" value="@ViewBag.StockID"/>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="date" value="@ViewBag.Date"/>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="purPrice" value="@ViewBag.PurchasePrice"/>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Confirm" class="btn btn-primary" />
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="profit" value="@ViewBag.NetProfit"/>
+        </div>
+    </form>
+</div>
+
+<a asp-action="Details" asp-route-id="@ViewBag.AccountID">Cancel</a>

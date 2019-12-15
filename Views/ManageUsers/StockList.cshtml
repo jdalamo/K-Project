@@ -1,0 +1,53 @@
+﻿@model IEnumerable<fa19projectgroup16.Stock>
+
+@{
+    ViewData["Title"] = "Edit Stock Prices";
+}
+
+<table width="1000">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StockName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockTicker)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockFee)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockTicker)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockFee)
+                </td>
+                <td>
+                    <a asp-action="StockEdit" asp-route-stockID="@item.StockID">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+﻿@model fa19projectgroup16.Stock
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Dispute</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewBag.Error != null)
+        {
+            <p class="alert-danger">@ViewBag.Error</p>
+        }
+        <form asp-action="StockCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StockName" class="control-label"></label>
+                <input asp-for="StockName" class="form-control" />
+                <span asp-validation-for="StockName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StockTicker" class="control-label"></label>
+                <input asp-for="StockTicker" class="form-control" />
+                <span asp-validation-for="StockTicker" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="StockPrice" class="control-label"></label>
+                <input asp-for="StockPrice" class="form-control" />
+                <span asp-validation-for="StockPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StockFee" class="control-label"></label>
+                <input asp-for="StockFee" class="form-control" />
+                <span asp-validation-for="StockFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StockType" class="control-label"></label>
+                <label class="radio">@Html.RadioButtonFor(model => model.StockType, StockType.Ordinary)Ordinary</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.StockType, StockType.Index_Fund)Index Fund</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.StockType, StockType.ETF)ETF</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.StockType, StockType.Mutual_Fund)Mutual Fund</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.StockType, StockType.Futures)Futures</label>
+                <span asp-validation-for="StockType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

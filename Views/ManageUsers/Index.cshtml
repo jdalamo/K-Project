@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table>
+    <tr>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+        {
+            <td>
+                <a class="btn btn-primary" asp-action="Disputes">Current Disputes</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="LargeDeposits">Large Deposits</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="ProcessPortfolios">Process Portfolios</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="ManageEmployees">Manage Employees</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="StockCreate">Create Stocks</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="StockList">Edit Stock Prices</a>
+            </td>
+        }
+        <td>
+            <a class="btn btn-primary" asp-action="ManageCustomers">Manage Customers</a>
+        </td>
+    </tr>
+</table>

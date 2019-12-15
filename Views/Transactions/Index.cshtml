@@ -1,0 +1,115 @@
+﻿@model IEnumerable<fa19projectgroup16.Transaction>
+@using fa19projectgroup16.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    Displaying @ViewBag.SelectedTransactionsCount of @ViewBag.AllTransactionsCount Transactions
+</p>
+
+@if (User.IsInRole("Manager") || User.IsInRole("Employee"))
+{
+    <td>
+        <a class="btn btn-primary" asp-action="SearchTransactions" asp-controller="Transactions">Search Transactions</a>
+    </td>
+}
+
+
+@if (ViewBag.Enabled == true)
+{
+    <table>
+        <tr>
+            <td>
+                <form asp-action="Index" asp-controller="Accounts">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Deposit" name="transactionType">
+                    <div class="form-group">
+                        <input type="submit" value="Make a Deposit" class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index" asp-controller="Accounts">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Withdrawal" name="transactionType">
+                    <div class="form-group">
+                        <input type="submit" value="Make a Withdrawal" class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index" asp-controller="Accounts">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Transfer" name="transactionType">
+                    <div class="form-group">
+                        <input type="submit" value="Make a Transfer" class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index" asp-controller="Accounts">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Payment" name="transactionType">
+                    <div class="form-group">
+                        <input type="submit" value="Make a Payment - Pay. Them. Bills." class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Purchase" asp-controller="StockPortfolios">Purchase Stock</a>
+            </td>
+
+        </tr>
+    </table>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.TransactionID">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

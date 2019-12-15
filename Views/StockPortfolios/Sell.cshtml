@@ -1,0 +1,57 @@
+﻿@if (ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+<h4>@ViewBag.Company</h4>
+<table width="800">
+    <thead>
+        <tr>
+            <th>
+                Purchase Price
+            </th>
+            <th>
+                Current Price
+            </th>
+            <th>
+                Gain on sale
+            </th>
+            <th>
+                Number of Shares Owned
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @ViewBag.PurchasePrice
+            </td>
+            <td>
+                @ViewBag.CurrentPrice
+            </td>
+            <td>
+                @ViewBag.Gain
+            </td>
+            <td>
+                @ViewBag.NumShares
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Sell">
+            <h6>Number of shares to sell</h6>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <input name="numSharesWanted" class="form-control" />
+            </div>
+            <h6>Date</h6>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <input name="sDate" type="date" class="form-control" />
+            </div>
+            <input asp-route-stockID="@ViewBag.StockID" asp-route-numSharesOwned="@ViewBag.NumShares" asp-route-purPrice="@ViewBag.PurchasePrice" asp-route-sDate="" type="submit" value="Sell" class="btn btn-primary" />
+        </form>
+    </div>
+</div>

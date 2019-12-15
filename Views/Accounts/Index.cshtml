@@ -1,0 +1,191 @@
+﻿@model IEnumerable<fa19projectgroup16.Models.Account>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Index</h1>
+
+@if (ViewBag.Error != null)
+{
+    <p class="alert-warning">@ViewBag.Error</p>
+}
+
+@if (ViewBag.Enabled == true)
+{
+    <table>
+        <tr>
+            <td>
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Checkings" name="accountType">
+                    <div class="form-group">
+                        <input type="submit" value="Create Checking Account" class="btn btn-primary" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Savings" name="accountType">
+                    <div class="form-group">
+                        <input type="submit" value="Create Savings Account" class="btn btn-primary" />
+                    </div>
+                </form>
+            </td>
+            @if (ViewBag.HasIRA == false && ViewBag.Younger)
+            {
+                <td>
+                    <form asp-action="Index">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" value="IRA" name="accountType">
+                        <div class="form-group">
+                            <input type="submit" value="Create IRA Account" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </td>
+            }
+
+            @if (ViewBag.HasStockPortfolio == false)
+            {
+                <td>
+                    <form asp-action="Index">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" value="StockPortfolio" name="accountType">
+                        <div class="form-group">
+                            <input type="submit" value="Create Stock Portfolio" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </td>
+            }
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td>
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Deposit" name="transactionType">
+                    <div class="form-group">
+                        <input type="submit" value="Make a Deposit" class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Withdrawal" name="transactionType">
+                    <div class="form-group">
+                        <input type="submit" value="Make a Withdrawal" class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Transfer" name="transactionType">
+                    <div class="form-group">
+                        <input type="submit" value="Make a Transfer" class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="Payment" name="transactionType">
+                    <div class="form-group">
+                        <input type="submit" value="Make a Payment - Pay. Them. Bills." class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Purchase" asp-controller="StockPortfolios">Purchase Stock</a>
+            </td>
+
+
+        </tr>
+
+    </table>
+}
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountType)
+            </th>
+            <th>
+                Last Four of Account Number
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumberLastFour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                <td>
+                    @if (item.AccountType == AccountType.Stock)
+                    {
+                        @ViewBag.StockPortfolioTotalBalance
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Balance)
+                    }
+                </td>
+                <td>
+                    @if (item.AccountType == AccountType.Checking || item.AccountType == AccountType.Savings)
+                    {
+                        <a asp-action="Details" asp-controller="StandardAccounts" asp-route-id="@item.AccountID">Details</a>
+                        @if (ViewBag.Enabled == true)
+                        {
+                            <a asp-action="Edit" asp-controller="StandardAccounts" asp-route-id="@item.AccountID">Edit</a>
+                        }
+
+
+                    }
+                    @if (item.AccountType == AccountType.IRA)
+                    {
+                        <a asp-action="Details" asp-controller="IRAAccounts" asp-route-id="@item.AccountID">Details</a>
+                        @if (ViewBag.Enabled == true)
+                        {
+                            <a asp-action="Edit" asp-controller="IRAAccounts" asp-route-id="@item.AccountID">Edit</a>
+                        }
+
+
+                    }
+                    @if (item.AccountType == AccountType.Stock)
+                    {
+                        <a asp-action="Details" asp-controller="StockPortfolios" asp-route-id="@item.AccountID">Details</a>
+                        @if (ViewBag.Enabled == true)
+                        {
+                            <a asp-action="Edit" asp-controller="StockPortfolios" asp-route-id="@item.AccountID">Edit</a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

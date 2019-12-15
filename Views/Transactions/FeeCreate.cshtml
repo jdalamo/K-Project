@@ -1,0 +1,27 @@
+﻿@model fa19projectgroup16.Transaction
+
+@{
+    ViewData["Title"] = "FeeCreate";
+}
+
+<h1>Unqualified Withdrawal Fee</h1>
+<p>Congrats! You are under 65. Unfortunately, we charge a fee of $30 to withdraw from an IRA when you are under 65.</p>
+
+@if (ViewBag.Message == "Option")
+{
+    <form asp-action="FeeCreate">
+        <input type="hidden" value="@ViewBag.transactionID" name="transactionID">
+        <input type="hidden" value="Add" name="feeDecision">
+        <div class="form-group">
+            <input type="submit" value="Add a $30 Fee" class="btn btn-primary" />
+        </div>
+    </form>
+}
+
+<form asp-action="FeeCreate">
+    <input type="hidden" value="@ViewBag.transactionID" name="transactionID">
+    <input type="hidden" value="Included" name="feeDecision">
+    <div class="form-group">
+        <input type="submit" value="Take fee from withdrawal amount" class="btn btn-primary" />
+    </div>
+</form>

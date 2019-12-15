@@ -1,0 +1,58 @@
+﻿@model fa19projectgroup16.Dispute
+
+@{
+    ViewData["Title"] = "ResolveDispute";
+}
+
+<h1>Resolve Dispute</h1>
+<div>
+    <h4>Dispute</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerComment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CustomerComment)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaction.Amount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaction.Amount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CorrectAmount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CorrectAmount)
+        </dd>
+    </dl>
+</div>
+<form asp-action="ResolveDispute">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label><br />
+        <label class="radio">@Html.RadioButtonFor(model => model.Status, Status.Accepted)Accept</label><br />
+        <label class="radio">@Html.RadioButtonFor(model => model.Status, Status.Rejected)Reject</label><br />
+        <label class="radio">@Html.RadioButtonFor(model => model.Status, Status.Adjusted)Adjust</label>
+    <div class="form-group">
+    </div>
+        @if (ViewBag.Error != null)
+        {
+            <label class="control-label alert-danger">@ViewBag.Error</label>
+        }
+        <p>What amount should this transaction be adjusted to?</p>
+        <label asp-for="Transaction.Amount" class="control-label"></label>
+        <input name="Amount" class="form-control" />
+        <span asp-validation-for="Transaction.Amount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ManagerComment" class="control-label"></label>
+        <input asp-for="ManagerComment" class="form-control" />
+        <span asp-validation-for="ManagerComment" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Resolve" class="btn btn-primary" />
+    </div>
+</form>
