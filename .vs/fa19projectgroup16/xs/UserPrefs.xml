@@ -1,0 +1,35 @@
+﻿<Properties StartupConfiguration="{5A66111F-E1FD-49AD-BE04-00BC77D6BC4D}|Default">
+  <MonoDevelop.Ide.ItemProperties.fa19projectgroup16 PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ManageUsersController.cs">
+    <Files>
+      <File FileName="Views/Shared/_LoginPartial.cshtml" Line="20" Column="1" />
+      <File FileName="Views/Shared/_ValidationScriptsPartial.cshtml" />
+      <File FileName="Controllers/UserController.cs" Line="319" Column="9" />
+      <File FileName="Controllers/ManageUsersController.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="fa19projectgroup16" expanded="True">
+            <Node name="fa19projectgroup16" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="ManageUsersController.cs" selected="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Disputes" expanded="True" />
+                <Node name="Shared" expanded="True" />
+                <Node name="User" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

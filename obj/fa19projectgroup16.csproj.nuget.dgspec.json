@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/jd/Desktop/kproject/fa19projectgroup16.csproj": {}
+    "/Users/jd/Desktop/K-Project/fa19projectgroup16.csproj": {}
   },
   "projects": {
-    "/Users/jd/Desktop/kproject/fa19projectgroup16.csproj": {
+    "/Users/jd/Desktop/K-Project/fa19projectgroup16.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jd/Desktop/kproject/fa19projectgroup16.csproj",
+        "projectUniqueName": "/Users/jd/Desktop/K-Project/fa19projectgroup16.csproj",
         "projectName": "fa19projectgroup16",
-        "projectPath": "/Users/jd/Desktop/kproject/fa19projectgroup16.csproj",
+        "projectPath": "/Users/jd/Desktop/K-Project/fa19projectgroup16.csproj",
         "packagesPath": "/Users/jd/.nuget/packages/",
-        "outputPath": "/Users/jd/Desktop/kproject/obj/",
+        "outputPath": "/Users/jd/Desktop/K-Project/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
